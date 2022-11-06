@@ -1,4 +1,4 @@
-# grocery_store
+# Grocery Store
 
 A new Flutter project.
 
