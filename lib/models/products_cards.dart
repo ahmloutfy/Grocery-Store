@@ -9,10 +9,17 @@ class GroceryCard {
       itemBuilder: (BuildContext context, int index) {
         return ClipRect(
           child: Container(
+            clipBehavior: Clip.none,
             width: 140.0,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15.0),
-              color: kLightGrey,
+              color: Colors.white,
+              boxShadow: const [
+                BoxShadow(
+                  blurRadius: 10,
+                  color: Colors.black,
+                ),
+              ],
             ),
             margin: const EdgeInsets.all(10.0),
             child: Padding(
@@ -44,7 +51,7 @@ class GroceryCard {
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               height: 1.5,
-                              color: Colors.amber,
+                              color: kDarkGrey,
                               fontSize: 12.5,
                               fontWeight: FontWeight.bold,
                             ),
@@ -72,7 +79,7 @@ class GroceryCard {
                           height: 40.0,
                           width: 40.0,
                           child: const IconButton(
-                            // padding: EdgeInsets.fromLTRB(0, 1, 0, 2.5),
+                            padding: EdgeInsets.fromLTRB(0, 1, 0, 2.5),
                             onPressed: null,
                             icon: Icon(
                               Icons.add,

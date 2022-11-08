@@ -61,37 +61,44 @@ class GroceryPage extends StatelessWidget {
                   ),
                 ]),
                 const SizedBox(height: 10.0),
-                Stack(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(30.0),
-                      child: Image.asset(
-                        'images/lettuce.webp',
-                        height: 150.0,
-                        width: 450.0,
-                        fit: BoxFit.cover,
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30.0),
+                    color: const Color(0xFFE9F9F2),
+                  ),
+                  width: double.infinity,
+                  child: Stack(
+                    children: [
+                      ClipRRect(
+                        child: Image.asset(
+                          '${kProductsImagesAsset}lettuce.png',
+                          height: 150,
+                          width: 150,
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(40.0),
-                      child: Column(
-                        children: [
-                          Text(
-                            'Get Up To',
-                            style: kGreenTitleStyle.copyWith(
-                              fontSize: 20.0,
+                      Padding(
+                        padding: const EdgeInsets.all(40.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Get Up To',
+                              style: kGreenTitleStyle.copyWith(
+                                fontSize: 20.0,
+                              ),
                             ),
-                          ),
-                          Text(
-                            '%10 off',
-                            style: kGreenTitleStyle.copyWith(
-                              fontSize: 40.0,
+                            Text(
+                              '%10 off',
+                              style: kGreenTitleStyle.copyWith(
+                                fontSize: 40.0,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(1.0),
