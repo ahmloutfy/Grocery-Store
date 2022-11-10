@@ -16,26 +16,26 @@ class GroceryPage extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Row(
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.only(left: 10.0),
-                      child: Text(
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 0, 1, 0),
+                  child: Row(
+                    children: [
+                      const Text(
                         'Grocery',
                         style: kTitleTextStyle,
                       ),
-                    ),
-                    const Spacer(),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(16.0),
-                      child: Image.asset(
-                        'images/apple.jpg',
-                        width: 46.0,
-                        height: 46.0,
-                        fit: BoxFit.cover,
+                      const Spacer(),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(16.0),
+                        child: Image.asset(
+                          'images/apple.jpg',
+                          width: 46.0,
+                          height: 46.0,
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 const SizedBox(height: 10.0),
                 Row(children: [
@@ -62,6 +62,7 @@ class GroceryPage extends StatelessWidget {
                 ]),
                 const SizedBox(height: 10.0),
                 Container(
+                  height: 150,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30.0),
                     color: const Color(0xFFE9F9F2),
@@ -69,16 +70,17 @@ class GroceryPage extends StatelessWidget {
                   width: double.infinity,
                   child: Stack(
                     children: [
-                      ClipRRect(
+                      Positioned(
+                        bottom: -150,
+                        right: -10,
+                        height: 290,
                         child: Image.asset(
                           '${kProductsImagesAsset}lettuce.png',
-                          height: 150,
-                          width: 150,
-                          fit: BoxFit.cover,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(40.0),
+                      Positioned(
+                        top: 30,
+                        left: 25,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -100,30 +102,30 @@ class GroceryPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(1.0),
-                  child: Row(
-                    children: const [
-                      Text(
+                Row(
+                  children: const [
+                    Padding(
+                      padding: EdgeInsets.only(left: 10),
+                      child: Text(
                         'Fruits',
                         style: TextStyle(
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Spacer(),
-                      TextButton(
-                          onPressed: null,
-                          child: Text(
-                            'View More',
-                            style: TextStyle(
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.bold,
-                              color: kDarkGreen,
-                            ),
-                          )),
-                    ],
-                  ),
+                    ),
+                    Spacer(),
+                    TextButton(
+                        onPressed: null,
+                        child: Text(
+                          'View More',
+                          style: TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                            color: kDarkGreen,
+                          ),
+                        )),
+                  ],
                 ),
                 SizedBox(
                   height: 215,
@@ -136,5 +138,23 @@ class GroceryPage extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class HalfClip extends CustomClipper<Path> {
+  @override
+  getClip(Size size) {
+    Path path = Path();
+    path.lineTo(0, size.height - 60);
+    path.lineTo(size.width, size.height - 60);
+    path.lineTo(size.width, 0);
+    path.close();
+
+    return path;
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper oldClipper) {
+    throw false;
   }
 }

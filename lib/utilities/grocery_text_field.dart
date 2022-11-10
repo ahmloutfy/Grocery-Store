@@ -8,22 +8,23 @@ class GroceryTextField {
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 8, 8, 8),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: TextField(
-            decoration: InputDecoration(
-              prefixIcon: const Icon(
+        child: TextField(
+          decoration: InputDecoration(
+            contentPadding: const EdgeInsets.symmetric(vertical: 16),
+            prefixIcon: const Padding(
+              padding: EdgeInsets.only(left: 20),
+              child: Icon(
                 Icons.search,
                 size: 30.0,
               ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: kLightGrey),
-                borderRadius: BorderRadius.circular(21.0),
-              ),
-              filled: true,
-              fillColor: kLightGrey,
-              hintText: groceryText,
             ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: kLightGrey),
+              borderRadius: BorderRadius.circular(21.0),
+            ),
+            filled: true,
+            fillColor: kLightGrey,
+            hintText: groceryText,
           ),
         ),
       ),
