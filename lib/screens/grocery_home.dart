@@ -140,21 +140,3 @@ class GroceryPage extends StatelessWidget {
     );
   }
 }
-
-class HalfClip extends CustomClipper<Path> {
-  @override
-  getClip(Size size) {
-    Path path = Path();
-    path.lineTo(0, size.height - 60);
-    path.lineTo(size.width, size.height - 60);
-    path.lineTo(size.width, 0);
-    path.close();
-
-    return path;
-  }
-
-  @override
-  bool shouldReclip(covariant CustomClipper oldClipper) {
-    throw false;
-  }
-}
