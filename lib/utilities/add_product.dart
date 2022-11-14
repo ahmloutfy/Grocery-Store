@@ -10,7 +10,6 @@ class AddProduct extends StatefulWidget {
 
 class _AddProductState extends State<AddProduct> {
   bool isAdded = true;
-  Color buttonColor = kDarkGreen;
   @override
   Widget build(BuildContext context) {
     return Align(
