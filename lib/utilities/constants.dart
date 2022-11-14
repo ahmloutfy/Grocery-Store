@@ -13,6 +13,10 @@ const kDarkGreen = Color(0xFF5DB57E);
 
 const kProductsImagesAsset = 'images/products/';
 
+const kFruitsImagesAsset = 'images/products/fruits/';
+
+const kVegetablesImagesAsset = 'images/products/vegetables/';
+
 const kGreenTitleStyle = TextStyle(
   fontWeight: FontWeight.bold,
   shadows: [

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_store/utilities/add_product.dart';
 import 'package:grocery_store/utilities/constants.dart';
 
 class GroceryCard {
@@ -27,7 +28,7 @@ class GroceryCard {
               child: Column(
                 children: [
                   Image.asset(
-                    '${kProductsImagesAsset}bananas.png',
+                    '${kFruitsImagesAsset}bananas.png',
                     height: 80.0,
                     width: 90.0,
                   ),
@@ -61,33 +62,15 @@ class GroceryCard {
                     ],
                   ),
                   Row(
-                    children: [
-                      const Text(
+                    children: const [
+                      Text(
                         '\$4.99',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const Spacer(),
-                      Align(
-                        alignment: Alignment.topCenter,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15.5),
-                            color: kDarkGreen,
-                          ),
-                          height: 40.0,
-                          width: 40.0,
-                          child: const IconButton(
-                            padding: EdgeInsets.fromLTRB(0, 1, 0, 2.5),
-                            onPressed: null,
-                            icon: Icon(
-                              Icons.add,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
+                      Spacer(),
+                      AddProduct(),
                     ],
                   )
                 ],
