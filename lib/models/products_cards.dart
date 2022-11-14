@@ -10,7 +10,6 @@ class GroceryCard {
       itemBuilder: (BuildContext context, int index) {
         return ClipRect(
           child: Container(
-            clipBehavior: Clip.none,
             width: 140.0,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15.0),

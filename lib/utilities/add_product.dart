@@ -10,7 +10,7 @@ class AddProduct extends StatefulWidget {
 
 class _AddProductState extends State<AddProduct> {
   bool isAdded = true;
-  Color? buttonColor;
+  Color buttonColor = kDarkGreen;
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -20,8 +20,8 @@ class _AddProductState extends State<AddProduct> {
           child: InkWell(
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15.5),
-                color: buttonColor!,
+                borderRadius: BorderRadius.circular(15.0),
+                color: isAdded ? kDarkGreen : kLightGrey,
               ),
               height: 40.0,
               width: 40.0,
@@ -33,7 +33,9 @@ class _AddProductState extends State<AddProduct> {
                 ),
               ),
             ),
-            onTap: () => buttonColor = isAdded ? kDarkGreen : kLightGrey,
+            onTap: () => setState(() {
+              isAdded = !isAdded;
+            }),
           ),
         ),
       ),
