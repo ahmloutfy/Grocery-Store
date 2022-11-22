@@ -4,10 +4,16 @@ import 'package:grocery_store/models/product_cards_column.dart';
 import 'package:grocery_store/utilities/constants.dart';
 import 'package:grocery_store/utilities/grocery_text_field.dart';
 
+import '../models/products_cards.dart';
+import '../models/products_list.dart';
+
 class GroceryPage extends StatelessWidget {
   const GroceryPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    var discountPortrait =
+        MediaQuery.of(context).orientation == Orientation.portrait;
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -71,23 +77,23 @@ class GroceryPage extends StatelessWidget {
                     children: [
                       Positioned(
                         bottom: -150,
-                        right: -10,
+                        right: discountPortrait ? -30 : 30,
                         height: 290,
-                        width: 350,
+                        width: 430,
                         child: Image.asset(
                           '${kProductsImagesAsset}lettuce.png',
                         ),
                       ),
                       Positioned(
-                        top: 30,
-                        left: 25,
+                        top: discountPortrait ? 35 : 15,
+                        left: discountPortrait ? 25 : 100,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               'Get Up To',
                               style: kGreenTitleStyle.copyWith(
-                                fontSize: 20.0,
+                                fontSize: discountPortrait ? 20 : 60,
                               ),
                             ),
                             Text(
@@ -102,11 +108,21 @@ class GroceryPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                const ProductCardsColumn(
-                  groceryType: 'Fruits',
+                Column(
+                  children: [
+                    const ProductCardsRow(
+                      groceryType: 'Fruits',
+                    ),
+                    GroceryCard(listOfItems: fruitsList),
+                  ],
                 ),
-                const ProductCardsColumn(
-                  groceryType: 'Vegetables',
+                Column(
+                  children: [
+                    const ProductCardsRow(
+                      groceryType: 'Vegetables',
+                    ),
+                    GroceryCard(listOfItems: vegetablesList),
+                  ],
                 ),
               ],
             ),
