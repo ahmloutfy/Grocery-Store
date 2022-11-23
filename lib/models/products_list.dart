@@ -38,7 +38,7 @@ final Fruits peaches = Fruits(
   fruitPrice: '\$12.00',
 );
 
-List fruitsList = [bananas, apples, chikku, peaches];
+List<Fruits> fruitsList = [bananas, apples, chikku, peaches];
 
 class Vegetables {
   final String? vegetableImage;
@@ -54,31 +54,31 @@ class Vegetables {
 }
 
 final Vegetables okra = Vegetables(
-  vegetableImage: '${kVegetablesImagesAsset}okra.png',
+  vegetableImage: '${kVegetablesImagesAsset}okra.jpeg',
   vegetableName: 'Okra',
   vegetableCategory: 'Organic',
   vegetablePrice: '\$6.99',
 );
 
 final Vegetables peas = Vegetables(
-  vegetableImage: '${kVegetablesImagesAsset}peas.png',
+  vegetableImage: '${kVegetablesImagesAsset}peas.jpeg',
   vegetableName: 'Peas',
   vegetableCategory: 'Organic',
   vegetablePrice: '\$10.50',
 );
 
 final Vegetables potatoes = Vegetables(
-  vegetableImage: '${kVegetablesImagesAsset}potatoes.png',
+  vegetableImage: '${kVegetablesImagesAsset}potatoes.jpeg',
   vegetableName: 'Potatoes',
   vegetableCategory: 'Organic',
   vegetablePrice: '\$5.99',
 );
 
 final Vegetables taro = Vegetables(
-  vegetableImage: '${kVegetablesImagesAsset}taro.png',
+  vegetableImage: '${kVegetablesImagesAsset}taro.jpg',
   vegetableName: 'Taro',
   vegetableCategory: 'Organic',
   vegetablePrice: '\$5.50',
 );
 
-List vegetablesList = [okra, peas, potatoes, taro];
+List<Vegetables> vegetablesList = [okra, peas, potatoes, taro];

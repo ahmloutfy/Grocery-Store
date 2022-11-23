@@ -113,7 +113,13 @@ class GroceryPage extends StatelessWidget {
                     const ProductCardsRow(
                       groceryType: 'Fruits',
                     ),
-                    GroceryCard(listOfItems: fruitsList),
+                    SizedBox(
+                      height: 215,
+                      width: double.infinity,
+                      child: ProductsListView(
+                        productsList: fruitsList,
+                      ),
+                    ),
                   ],
                 ),
                 Column(
@@ -121,7 +127,13 @@ class GroceryPage extends StatelessWidget {
                     const ProductCardsRow(
                       groceryType: 'Vegetables',
                     ),
-                    GroceryCard(listOfItems: vegetablesList),
+                    SizedBox(
+                      height: 215,
+                      width: double.infinity,
+                      child: ProductsListView(
+                        productsList: vegetablesList,
+                      ),
+                    ),
                   ],
                 ),
               ],
