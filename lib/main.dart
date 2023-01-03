@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_store/screens/grocery_home.dart';
+import 'package:grocery_store/screens/add_new_product.dart';
 import 'package:grocery_store/utilities/scroll_behavior.dart';
 
 void main() {
@@ -13,7 +13,7 @@ class GroceryStore extends StatelessWidget {
     return MaterialApp(
       scrollBehavior: MyCustomScrollBehavior(),
       debugShowCheckedModeBanner: false,
-      home: const GroceryPage(),
+      home: const AddNewProduct(),
     );
   }
 }

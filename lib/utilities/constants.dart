@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 const kTitleTextStyle = TextStyle(
   fontSize: 30.0,
@@ -27,3 +30,15 @@ const kGreenTitleStyle = TextStyle(
   ],
   color: kDarkGreen,
 );
+
+class UniversalKey {
+  static final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+}
+
+File? galleryFile = File(PickImageFromGallery.pickImageFromGallery().path);
+
+class PickImageFromGallery {
+  static pickImageFromGallery() async {
+    await ImagePicker().pickImage(source: ImageSource.gallery);
+  }
+}

@@ -81,4 +81,4 @@ final Vegetables taro = Vegetables(
   vegetablePrice: '\$5.50',
 );
 
-List<Vegetables> vegetablesList = [okra, peas, potatoes, taro];
+List vegetablesList = [okra, peas, potatoes, taro];
