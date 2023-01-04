@@ -1,9 +1,9 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-
+import 'package:image_picker_web/image_picker_web.dart';
 import '../utilities/constants.dart';
+import 'package:flutter/foundation.dart';
 
 class AddNewProduct extends StatefulWidget {
   const AddNewProduct({Key? key}) : super(key: key);
@@ -13,16 +13,25 @@ class AddNewProduct extends StatefulWidget {
 }
 
 class _AddNewProductState extends State<AddNewProduct> {
-  File? _image;
+  File? _mobileImage;
+  final _mobilePicker = ImagePicker();
+  File? _webImage;
 
-  final _picker = ImagePicker();
-  // Implementing the image picker
-  Future<void> _openImagePicker() async {
-    final XFile? pickedImage =
-        await _picker.pickImage(source: ImageSource.gallery);
-    if (pickedImage != null) {
+  Future<void> _openMobileImagePicker() async {
+    final XFile? pickedMobileImage =
+        await _mobilePicker.pickImage(source: ImageSource.gallery);
+    if (pickedMobileImage != null) {
       setState(() {
-        _image = File(pickedImage.path);
+        _mobileImage = File(pickedMobileImage.path);
+      });
+    }
+  }
+
+  Future<void> _openWebImagePicker() async {
+    final XFile? pickedWebImage = await ImagePickerWeb.getImageAsBytes();
+    if (pickedWebImage != null) {
+      setState(() {
+        _webImage = File(pickedWebImage.path);
       });
     }
   }
@@ -66,7 +75,11 @@ class _AddNewProductState extends State<AddNewProduct> {
                             children: [
                               ElevatedButton(
                                 onPressed: () {
-                                  _openImagePicker();
+                                  if (Platform.isAndroid) {
+                                    _openMobileImagePicker();
+                                  } else {
+                                    _openWebImagePicker();
+                                  }
                                 },
                                 child: const Text('Add Product Image'),
                               ),
@@ -86,9 +99,18 @@ class _AddNewProductState extends State<AddNewProduct> {
                                   shape: BoxShape.circle,
                                 ),
                                 child: CircleAvatar(
-                                  backgroundImage: if (_image != null) {Image.file(_image!, fit: BoxFit.fill).image} else {Image.asset('images/no_image.png'),}
-
-                              ),
+                                  backgroundImage: (Platform.isAndroid &&
+                                          _mobileImage != null)
+                                      ? Image.file(_mobileImage!,
+                                              fit: BoxFit.fill)
+                                          .image
+                                      : (kIsWeb && _webImage != null)
+                                          ? Image.file(_webImage!,
+                                                  fit: BoxFit.fill)
+                                              .image
+                                          : Image.asset('images/no_image.png')
+                                              .image,
+                                ),
                               ),
                             ],
                           ),
