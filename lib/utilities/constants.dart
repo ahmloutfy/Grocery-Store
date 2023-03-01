@@ -1,7 +1,7 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 const kTitleTextStyle = TextStyle(
   fontSize: 30.0,
@@ -35,10 +35,23 @@ class UniversalKey {
   static final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 }
 
-File? galleryFile = File(PickImageFromGallery.pickImageFromGallery().path);
-
-class PickImageFromGallery {
-  static pickImageFromGallery() async {
-    await ImagePicker().pickImage(source: ImageSource.gallery);
-  }
+class ImageFiles {
+  static File? mobileImage;
+  static Uint8List? webImage;
 }
+
+class ProductDetails {
+  static File? productImage;
+  static String? productName;
+  static String? productPrice;
+}
+
+OutlineInputBorder kDefaultOutlineInputBorder = OutlineInputBorder(
+  borderRadius: BorderRadius.circular(20),
+);
+
+InputDecorationTheme kDefaultInputDecorationTheme = InputDecorationTheme(
+  border: kDefaultOutlineInputBorder,
+  enabledBorder: kDefaultOutlineInputBorder,
+  focusedBorder: kDefaultOutlineInputBorder,
+);

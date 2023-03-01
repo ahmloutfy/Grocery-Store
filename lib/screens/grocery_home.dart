@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:grocery_store/models/product_cards_column.dart';
+import 'package:grocery_store/models/product_cards_row.dart';
 import 'package:grocery_store/utilities/constants.dart';
 import 'package:grocery_store/utilities/grocery_text_field.dart';
-
 import '../models/products_cards.dart';
-import '../models/products_list.dart';
 
 class GroceryPage extends StatelessWidget {
   const GroceryPage({Key? key}) : super(key: key);
@@ -109,29 +107,29 @@ class GroceryPage extends StatelessWidget {
                   ),
                 ),
                 Column(
-                  children: [
-                    const ProductCardsRow(
+                  children: const [
+                    ProductCardsRow(
                       groceryType: 'Fruits',
                     ),
                     SizedBox(
                       height: 215,
                       width: double.infinity,
                       child: ProductsListView(
-                        productsList: fruitsList,
+
                       ),
                     ),
                   ],
                 ),
                 Column(
-                  children: [
-                    const ProductCardsRow(
+                  children:  const [
+                    ProductCardsRow(
                       groceryType: 'Vegetables',
                     ),
                     SizedBox(
                       height: 215,
                       width: double.infinity,
                       child: ProductsListView(
-                        productsList: vegetablesList,
+
                       ),
                     ),
                   ],

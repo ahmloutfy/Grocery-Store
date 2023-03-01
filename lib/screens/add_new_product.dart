@@ -1,37 +1,29 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:image_picker_web/image_picker_web.dart';
+import '../models/products_list.dart';
 import '../utilities/constants.dart';
-import 'package:flutter/foundation.dart';
+import 'grocery_home.dart';
 
 class AddNewProduct extends StatefulWidget {
-  const AddNewProduct({Key? key}) : super(key: key);
+  final Product? product;
+
+  const AddNewProduct({Key? key, this.product}) : super(key: key);
 
   @override
   State<AddNewProduct> createState() => _AddNewProductState();
 }
 
 class _AddNewProductState extends State<AddNewProduct> {
-  File? _mobileImage;
-  final _mobilePicker = ImagePicker();
-  File? _webImage;
+  String? dropdownValue = 'Fruits';
 
-  Future<void> _openMobileImagePicker() async {
-    final XFile? pickedMobileImage =
-        await _mobilePicker.pickImage(source: ImageSource.gallery);
-    if (pickedMobileImage != null) {
-      setState(() {
-        _mobileImage = File(pickedMobileImage.path);
-      });
-    }
-  }
 
-  Future<void> _openWebImagePicker() async {
-    final XFile? pickedWebImage = await ImagePickerWeb.getImageAsBytes();
-    if (pickedWebImage != null) {
+  Future<void> openMobileImagePicker() async {
+    final XFile? mobileImage =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (mobileImage != null) {
       setState(() {
-        _webImage = File(pickedWebImage.path);
+        widget.product!.mobileImage = File(mobileImage.path);
       });
     }
   }
@@ -75,11 +67,9 @@ class _AddNewProductState extends State<AddNewProduct> {
                             children: [
                               ElevatedButton(
                                 onPressed: () {
-                                  if (Platform.isAndroid) {
-                                    _openMobileImagePicker();
-                                  } else {
-                                    _openWebImagePicker();
-                                  }
+                                  setState(() {
+                                    openMobileImagePicker();
+                                  });
                                 },
                                 child: const Text('Add Product Image'),
                               ),
@@ -99,19 +89,117 @@ class _AddNewProductState extends State<AddNewProduct> {
                                   shape: BoxShape.circle,
                                 ),
                                 child: CircleAvatar(
-                                  backgroundImage: (Platform.isAndroid &&
-                                          _mobileImage != null)
-                                      ? Image.file(_mobileImage!,
-                                              fit: BoxFit.fill)
-                                          .image
-                                      : (kIsWeb && _webImage != null)
-                                          ? Image.file(_webImage!,
-                                                  fit: BoxFit.fill)
-                                              .image
-                                          : Image.asset('images/no_image.png')
-                                              .image,
+                                    backgroundImage:
+                                    (widget.product?.mobileImage) != null ? Image.file(widget.product!.mobileImage,
+                                        fit: BoxFit.fill)
+                                        .image : Image.file(File('images/grocery.png'),
+                                        fit: BoxFit.fill).image,
+
                                 ),
                               ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              TextFormField(
+                                onSaved: (value) {
+                                  if (value != null) {
+                                    setState(() {
+                                      widget.product!.productName = value;
+                                    });
+                                  } else {
+                                    value = 'No Product';
+                                  }
+                                },
+                                decoration: const InputDecoration(
+                                    labelText: 'Product Name',
+                                    hintText: 'Add Product Name'),
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              TextFormField(
+                                onSaved: (value) {
+                                  if (value != null) {
+                                    setState(() {
+                                      widget.product!.productPrice = value as double?;
+                                    });
+                                  } else {
+                                    value = 'No Price';
+                                  }
+                                },
+                                decoration: const InputDecoration(
+                                    labelText: 'Product Price',
+                                    hintText: 'Add Product Price'),
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              DropdownButton<String>(
+                                value: dropdownValue,
+                                items: productCategory,
+                                // productCategory
+                                //     .map(
+                                //       (item) => DropdownMenuItem<String>(
+                                //         value: item,
+                                //         child: Text(
+                                //           item,
+                                //         ),
+                                //       ),
+                                //     )
+                                //     .toList(),
+                                onChanged: (item) =>
+                                    setState(() => dropdownValue = item),
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              ElevatedButton(
+
+                                  onPressed: () {
+                                    if (widget.product?.productName != null && widget.product!.productPrice != null) {
+                                      setState(() {
+                                        listOfProducts.add({
+                                          'productImage': widget.product?.mobileImage,
+                                          'productName': widget.product?.productName,
+                                          'productPrice': widget.product?.productPrice,
+                                          'productCategory': dropdownValue,
+                                        });
+                                      });
+                                    } else {
+                                      setState(() {
+                                        listOfProducts.add({
+                                          'productImage': File('images/grocery.png'),
+                                          'productName': 'Grocery Store',
+                                          'productPrice': 00.00,
+                                          'productCategory': dropdownValue,
+                                        });
+                                      });
+                                    }
+
+                                    // Update the state to reflect the new list of products
+                                    setState(() {
+                                      listOfProducts.map((product) => Product.fromMap(product)).toList();
+                                    });
+                                  }
+
+
+
+                                  ,
+
+                                   child: const Text('Add Product!'))
+                              ,
+
+                              const SizedBox(
+                                height: 20,
+                              ),
+
+                              ElevatedButton(onPressed: () {
+
+                                setState(() {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const GroceryPage(),),);
+                                });
+                              }, child: const Text('Go To Hompage'),),
+
                             ],
                           ),
                         ),
